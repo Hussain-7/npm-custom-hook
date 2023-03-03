@@ -1,8 +1,6 @@
-import { useCustomHook } from '../../use-custom-hook';
-
-import { toCamel } from '../lib/util';
-
-import hookConfig from '../../use-custom-hook/package.json';
+import { useViewport } from "../../use-custom-hook/src/index.js";
+import { toCamel } from "../lib/util";
+import hookConfig from "../../use-custom-hook/package.json";
 
 export default function Index() {
   const { name, description, repository = {}, author = {} } = hookConfig;
@@ -10,15 +8,12 @@ export default function Index() {
   const { name: authorName, url: authorUrl } = author;
 
   const { url: repositoryUrl } = repository;
-  const repositoryExists = typeof repositoryUrl === 'string';
+  const repositoryExists = typeof repositoryUrl === "string";
 
-  const repositoryUrlDisplay = repositoryExists && repositoryUrl.split('://')[1];
+  const repositoryUrlDisplay =
+    repositoryExists && repositoryUrl.split("://")[1];
 
-  const hookSettings = {
-    message: 'Hello, custom hook!'
-  }
-
-  const { message } = useCustomHook(hookSettings);
+  const { width, height } = useViewport();
 
   return (
     <main>
@@ -59,7 +54,7 @@ export default function Index() {
         }
 
         footer p {
-          font-size: .9em;
+          font-size: 0.9em;
         }
 
         footer p,
@@ -69,54 +64,33 @@ export default function Index() {
       `}</style>
 
       <section>
+        <h1>{toCamel(name)}</h1>
 
-        <h1>{ toCamel(name) }</h1>
+        <p>{description}</p>
 
-        <p>{ description }</p>
-
-        { repositoryExists && (
+        {repositoryExists && (
           <p>
-            <a href={repositoryUrl}>
-              { repositoryUrlDisplay }
-            </a>
+            <a href={repositoryUrl}>{repositoryUrlDisplay}</a>
           </p>
         )}
-
-        <h2>How to use</h2>
-
         <p>
-          Add your instructions here!
-        </p>
-
-        <h2>Examples</h2>
-
-        <h3>Set and grab message</h3>
-        <p>
-          <strong>Input:</strong>
+          <strong>How to use:</strong>
         </p>
         <pre>
-          <code>
-{`const hookSettings = {
-  message: 'Hello, custom hook!'
-}
-
-const { message } = useCustomHook(hookSettings);`}
-          </code>
+          <code>{`const { width,height } = useViewport();`}</code>
         </pre>
         <p>
           <strong>Output:</strong>
         </p>
-        <p>
-          { message }
-        </p>
+        <p>Current Width: {width}</p>
+        <p>Current Height: {height}</p>
       </section>
 
       <footer>
         <p>
-          Made by <a href={authorUrl}>{ authorName }</a>
+          Made by <a href={authorUrl}>{authorName}</a>
         </p>
       </footer>
     </main>
   );
-
 }
