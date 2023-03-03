@@ -1,1 +1,1 @@
-export { default as useCustomHook } from './useCustomHook';
+export { default as useViewport } from "./useViewport";
