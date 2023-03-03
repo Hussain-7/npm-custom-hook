@@ -1,8 +1,8 @@
 <!-- Readme for use custom hook -->
 
-# useCustomHook
+# useViewportHook
 
-A custom hook template for React.
+A custom viewport hook for React.
 
 ## 🚀 Getting Started
 
