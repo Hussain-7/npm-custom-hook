@@ -28,4 +28,4 @@ const { width, height } = useViewport()
 
 ## Output
 
-![use-viewport-hook](./output.png)
+![use-viewport-hook](./public/output.png)
